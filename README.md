@@ -19,5 +19,5 @@
 
 ## 相关技术
 1. 本地使用Sqlite,服务器使用SQL2008(有空的话支持MySql，部署到阿里云简单些)
-1. ORM准备使用SqlSugar
+1. ORM准备使用SqlSugar（在此感谢小杰同学有问必答）
 1. 加工线管理和出库管理使用WinForm，查询使用.Net Mvc 
