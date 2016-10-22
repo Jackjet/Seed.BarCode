@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seed.WarehouseHandLine", "Seed.WarehouseHandLine\Seed.WarehouseHandLine.csproj", "{3E868FE5-8BBA-47D1-BEE3-CCE36F818479}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seed.WarehouseSystem", "Seed.WarehouseSystem\Seed.WarehouseSystem.csproj", "{C1249ECA-1C4B-4A04-B84D-89A35089B1AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E868FE5-8BBA-47D1-BEE3-CCE36F818479}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E868FE5-8BBA-47D1-BEE3-CCE36F818479}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E868FE5-8BBA-47D1-BEE3-CCE36F818479}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E868FE5-8BBA-47D1-BEE3-CCE36F818479}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1249ECA-1C4B-4A04-B84D-89A35089B1AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1249ECA-1C4B-4A04-B84D-89A35089B1AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1249ECA-1C4B-4A04-B84D-89A35089B1AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1249ECA-1C4B-4A04-B84D-89A35089B1AC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
