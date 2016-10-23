@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(468, 366);
             this.Name = "Main";
             this.Text = "通用条码系统";
             this.ResumeLayout(false);
