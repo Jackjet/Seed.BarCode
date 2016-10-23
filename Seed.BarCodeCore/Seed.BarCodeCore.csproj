@@ -73,9 +73,11 @@
   <ItemGroup>
     <Compile Include="Dao\SugarDao.cs" />
     <Compile Include="Interface\ICodeQuery.cs" />
+    <Compile Include="Interface\IId.cs" />
     <Compile Include="Interface\IProduct.cs" />
     <Compile Include="Interface\ICode.cs" />
     <Compile Include="Interface\IService.cs" />
+    <Compile Include="Models\Scan.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Sale.cs" />

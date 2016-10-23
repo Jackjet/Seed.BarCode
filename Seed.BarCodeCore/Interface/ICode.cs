@@ -1,9 +1,8 @@
 ﻿
 namespace Seed.BarCodeCore.Interface
 {
-    public interface ICode
+    public interface ICode:IId
     {
-        string Id { get; set; }
         string ProductName { get; set; }
         string Batch { get; set; }
         string BigCode { get; set; }
