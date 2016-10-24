@@ -4,10 +4,11 @@ using System.Linq;
 using System.Media;
 using System.Text;
 using System.Threading.Tasks;
+using Seed.BarCodeCore.Interface;
 
 namespace Seed.BarCodeCore.Models
 {
-    public class Scan
+    public class Scan:IScan
     {
 
         private readonly SoundPlayer _player = new SoundPlayer();
