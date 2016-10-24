@@ -9,7 +9,7 @@ namespace Seed.BarCodeCore.Models
 {
     public class Product:IProduct
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string ProductName { get; set; }
         public string Batch { get; set; }
         public string BigCode { get; set; }

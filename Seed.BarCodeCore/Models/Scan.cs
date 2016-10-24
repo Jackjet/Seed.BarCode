@@ -4,23 +4,44 @@ using System.Linq;
 using System.Media;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Seed.BarCodeCore.Interface;
+using ListBox = System.Web.UI.WebControls.ListBox;
 
 namespace Seed.BarCodeCore.Models
 {
     public class Scan:IScan
     {
-
+        public ListBox SmlCodeList;
+        public RichTextBox Info;
+        public int Count { get; set; }
+        private int _bigCodeLen=10;
+        private int _smlCodeLen=12;
+        private int _specification = 30;
+        private string _codeType = "1";
+        private string _soundType = "0";
         private readonly SoundPlayer _player = new SoundPlayer();
+
+        public Scan(ListBox list,int productCount,int bigCodeLen,int smlCodeLen,int specification,string codeType,RichTextBox info,string soundType)
+        {
+            SmlCodeList = list;
+            Count = productCount;
+            _bigCodeLen = bigCodeLen;
+            _smlCodeLen = smlCodeLen;
+            _specification = specification;
+            _codeType = codeType;
+            Info = info;
+            _soundType = soundType;
+        }
         public void ScanBarCode(string code)
         {
-            if (IsBagFull(SmlCodeList.Items.Count.ToString(), Nubs.Text))
+            if (SmlCodeList != null && IsBagFull(SmlCodeList.Items.Count, _specification))
             {
-                if (IsBigCode(code, Convert.ToInt32(_bigCodeLen)))
+                if (IsBigCode(code, _bigCodeLen))
                 {
                     if (!IsAnyBigCode(code))
                     {
-                        _productNubs++;
+                        Count++;
                         InsertCode(code);
                         Play("zy");
                         SmlCodeList.Items.Clear();
@@ -53,7 +74,7 @@ namespace Seed.BarCodeCore.Models
                     }
                     else
                     {
-                        if ((code.Length.ToString() == _smlCodeLen))
+                        if ((code.Length == _smlCodeLen))
                         {
                             SmlCodeList.Items.Add(code);
                             Play(SmlCodeList.Items.Count.ToString());
@@ -80,13 +101,12 @@ namespace Seed.BarCodeCore.Models
         //逻辑修改为获取http字符前的n位数字，n=小条码长度
         private string ReadQrCode(string code)
         {
-            int len = Convert.ToInt32(_smlCodeLen);
-            if (code.IndexOf("http", StringComparison.Ordinal) < len)
+            if (code.IndexOf("http", StringComparison.Ordinal) < _smlCodeLen)
             {
                 Log("二维码不符合标准！");
                 return "";
             }
-            return code.Substring(code.IndexOf("http", StringComparison.Ordinal) - len, len);
+            return code.Substring(code.IndexOf("http", StringComparison.Ordinal) - _smlCodeLen, _smlCodeLen);
         }
 
         public void Log(string str)
@@ -103,7 +123,7 @@ namespace Seed.BarCodeCore.Models
             else
                 return false;
         }
-        public bool IsBagFull(string countNow, string countDefault)
+        public bool IsBagFull(int countNow, int countDefault)
         {
             if (countDefault == countNow)
                 return true;
@@ -146,16 +166,17 @@ namespace Seed.BarCodeCore.Models
         /// <returns></returns>
         public bool IsAnySmlCode(string code)
         {
-            if (_storeType == "1")
-            {
-                LongkeCodeResposities res = new LongkeCodeResposities();
-                return res.IsAnySmlCode(code);
-            }
-            else
-            {
-                LongkeCodesResposities res = new LongkeCodesResposities();
-                return res.IsAnySmlCode(code);
-            }
+            //if (_storeType == "1")
+            //{
+            //    LongkeCodeResposities res = new LongkeCodeResposities();
+            //    return res.IsAnySmlCode(code);
+            //}
+            //else
+            //{
+            //    LongkeCodesResposities res = new LongkeCodesResposities();
+            //    return res.IsAnySmlCode(code);
+            //}
+            return true;
         }
 
         public bool IsAnySmlCodeInList(string code)
@@ -170,16 +191,17 @@ namespace Seed.BarCodeCore.Models
         /// <returns></returns>
         public bool IsAnyBigCode(string code)
         {
-            if (_storeType == "1")
-            {
-                LongkeCodeResposities res = new LongkeCodeResposities();
-                return res.IsAnyBigCode(code);
-            }
-            else
-            {
-                LongkeCodesResposities res = new LongkeCodesResposities();
-                return res.IsAnyBigCode(code);
-            }
+            //if (_storeType == "1")
+            //{
+            //    LongkeCodeResposities res = new LongkeCodeResposities();
+            //    return res.IsAnyBigCode(code);
+            //}
+            //else
+            //{
+            //    LongkeCodesResposities res = new LongkeCodesResposities();
+            //    return res.IsAnyBigCode(code);
+            //}
+            return true;
         }
 
 
@@ -189,26 +211,26 @@ namespace Seed.BarCodeCore.Models
         /// <param name="code"></param>
         private void InsertCode(string code)
         {
-            if (_storeType == "1")
-            {
-                NcHandCode longke = new NcHandCode();
-                longke.BoxNubs = Nubs.Text;
-                longke.Patch = Patch.Text;
-                longke.ProductName = TProductName.Text;
-                longke.ProductLine = _productLine;
-                LongkeCodeResposities res = new LongkeCodeResposities();
-                res.InsertCodes(code, SmlCodeList, longke, _productNubs);
-            }
-            else
-            {
-                NcHandCodes longke = new NcHandCodes();
-                longke.BoxNubs = Nubs.Text;
-                longke.Patch = Patch.Text;
-                longke.ProductName = TProductName.Text;
-                longke.ProductLine = _productLine;
-                LongkeCodesResposities res = new LongkeCodesResposities();
-                res.InsertCodes(code, SmlCodeList, longke);
-            }
+            //if (_storeType == "1")
+            //{
+            //    NcHandCode longke = new NcHandCode();
+            //    longke.BoxNubs = Nubs.Text;
+            //    longke.Patch = Patch.Text;
+            //    longke.ProductName = TProductName.Text;
+            //    longke.ProductLine = _productLine;
+            //    LongkeCodeResposities res = new LongkeCodeResposities();
+            //    res.InsertCodes(code, SmlCodeList, longke, _productNubs);
+            //}
+            //else
+            //{
+            //    NcHandCodes longke = new NcHandCodes();
+            //    longke.BoxNubs = Nubs.Text;
+            //    longke.Patch = Patch.Text;
+            //    longke.ProductName = TProductName.Text;
+            //    longke.ProductLine = _productLine;
+            //    LongkeCodesResposities res = new LongkeCodesResposities();
+            //    res.InsertCodes(code, SmlCodeList, longke);
+            //}
         }
     }
 }

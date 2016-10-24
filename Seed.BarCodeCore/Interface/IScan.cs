@@ -12,7 +12,7 @@ namespace Seed.BarCodeCore.Interface
 
         void Log(string str);
         bool IsBigCode(string code, int len);
-        bool IsBagFull(string countNow, string countDefault);
+        bool IsBagFull(int countNow, int countDefault);
 
         bool IsAnySmlCode(string code);
 
