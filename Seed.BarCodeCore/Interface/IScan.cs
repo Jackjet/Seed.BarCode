@@ -14,9 +14,8 @@ namespace Seed.BarCodeCore.Interface
         bool IsBigCode(string code, int len);
         bool IsBagFull(int countNow, int countDefault);
 
-        bool IsAnySmlCode(string code);
 
         bool IsAnySmlCodeInList(string code);
-        bool IsAnyBigCode(string code);
+     
     }
 }
