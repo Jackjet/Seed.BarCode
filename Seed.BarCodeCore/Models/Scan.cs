@@ -89,7 +89,7 @@ namespace Seed.BarCodeCore.Models
             return code.Substring(code.IndexOf("http", StringComparison.Ordinal) - len, len);
         }
 
-        private void Log(string str)
+        public void Log(string str)
         {
             if (Info.GetLineFromCharIndex(Info.Text.Length) > 8)
                 Info.Text = "";
@@ -144,7 +144,7 @@ namespace Seed.BarCodeCore.Models
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        private bool IsAnySmlCode(string code)
+        public bool IsAnySmlCode(string code)
         {
             if (_storeType == "1")
             {
@@ -158,7 +158,7 @@ namespace Seed.BarCodeCore.Models
             }
         }
 
-        private bool IsAnySmlCodeInList(string code)
+        public bool IsAnySmlCodeInList(string code)
         {
             return SmlCodeList.Items.Cast<string>().Any(str => code == str);
         }
@@ -168,7 +168,7 @@ namespace Seed.BarCodeCore.Models
         /// </summary>
         /// <param name="code"></param>
         /// <returns></returns>
-        private bool IsAnyBigCode(string code)
+        public bool IsAnyBigCode(string code)
         {
             if (_storeType == "1")
             {

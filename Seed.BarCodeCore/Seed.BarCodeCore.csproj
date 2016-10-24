@@ -76,6 +76,7 @@
     <Compile Include="Interface\IId.cs" />
     <Compile Include="Interface\IProduct.cs" />
     <Compile Include="Interface\ICode.cs" />
+    <Compile Include="Interface\IScan.cs" />
     <Compile Include="Interface\IService.cs" />
     <Compile Include="Models\Scan.cs" />
     <Compile Include="Models\Store.cs" />
