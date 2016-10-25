@@ -16,11 +16,11 @@ namespace Seed.BarCodeCore.Models
         public ListBox SmlCodeList;
         public RichTextBox Info;
         public int Count { get; set; }
-        private readonly int _bigCodeLen=10;
-        private readonly int _smlCodeLen=12;
-        private readonly int _specification = 30;
-        private readonly string _codeType = "1";
-        private readonly string _soundType = "0";
+        private readonly int _bigCodeLen;
+        private readonly int _smlCodeLen;
+        private readonly int _specification;
+        private readonly string _codeType ;
+        private readonly string _soundType ;
         private readonly SoundPlayer _player = new SoundPlayer();
         public IResposity Resposity;
         private readonly Product _curProduct;
@@ -90,8 +90,11 @@ namespace Seed.BarCodeCore.Models
                     {
                         if ((code.Length == _smlCodeLen))
                         {
-                            SmlCodeList.Items.Add(code);
-                            Play(SmlCodeList.Items.Count.ToString());
+                            if (SmlCodeList != null)
+                            {
+                                SmlCodeList.Items.Add(code);
+                                Play(SmlCodeList.Items.Count.ToString());
+                            }
                         }
                         else
                         {
@@ -101,7 +104,6 @@ namespace Seed.BarCodeCore.Models
                 }
             }
         }
-        //当条码信息为二维码则需要获取第三行数据的条码
         //条码信息格式如下
 
         //北京XX种业公司
@@ -110,7 +112,6 @@ namespace Seed.BarCodeCore.Models
         //http://code.xxxx.com
 
         //2016-10-13
-        //条码枪会自动提出换行，所以修改直接获取第三行数据是错误的
         //逻辑修改为获取http字符前的n位数字，n=小条码长度
         private string ReadQrCode(string code)
         {
@@ -134,7 +135,7 @@ namespace Seed.BarCodeCore.Models
             else
                 return false;
         }
-        public bool IsBagFull(int countNow, int countDefault)
+        private bool IsBagFull(int countNow, int countDefault)
         {
             if (countDefault == countNow)
                 return true;
@@ -187,7 +188,6 @@ namespace Seed.BarCodeCore.Models
                 Resposity.InsertList(BarCodeTist<Products>(code));
             }
         }
-
         private List<T> BarCodeTist<T>(string code) where T : Product, new()
         {
             List<T> list = new List<T>();

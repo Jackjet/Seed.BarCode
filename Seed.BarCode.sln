@@ -4,10 +4,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seed.WarehouseHandLine", "Seed.WarehouseHandLine\Seed.WarehouseHandLine.csproj", "{3E868FE5-8BBA-47D1-BEE3-CCE36F818479}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C043EEFA-7CAF-4702-BD93-4C4F9E7FA9CF} = {C043EEFA-7CAF-4702-BD93-4C4F9E7FA9CF}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seed.WarehouseSystem", "Seed.WarehouseSystem\Seed.WarehouseSystem.csproj", "{C1249ECA-1C4B-4A04-B84D-89A35089B1AC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C043EEFA-7CAF-4702-BD93-4C4F9E7FA9CF} = {C043EEFA-7CAF-4702-BD93-4C4F9E7FA9CF}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seed.BarCodeMvc", "Seed.BarCodeMvc\Seed.BarCodeMvc.csproj", "{BCBC2F51-664E-4275-8993-22EBD89094DF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C043EEFA-7CAF-4702-BD93-4C4F9E7FA9CF} = {C043EEFA-7CAF-4702-BD93-4C4F9E7FA9CF}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seed.BarCodeCore", "Seed.BarCodeCore\Seed.BarCodeCore.csproj", "{C043EEFA-7CAF-4702-BD93-4C4F9E7FA9CF}"
 EndProject
