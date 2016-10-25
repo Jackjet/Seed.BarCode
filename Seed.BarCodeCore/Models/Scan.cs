@@ -21,8 +21,9 @@ namespace Seed.BarCodeCore.Models
         private string _codeType = "1";
         private string _soundType = "0";
         private readonly SoundPlayer _player = new SoundPlayer();
+        public IResposity Res;
 
-        public Scan(ListBox list,int productCount,int bigCodeLen,int smlCodeLen,int specification,string codeType,RichTextBox info,string soundType)
+        public Scan(ListBox list,int productCount,int bigCodeLen,int smlCodeLen,int specification,string codeType,RichTextBox info,string soundType,string storeType)
         {
             SmlCodeList = list;
             Count = productCount;
@@ -32,6 +33,10 @@ namespace Seed.BarCodeCore.Models
             _codeType = codeType;
             Info = info;
             _soundType = soundType;
+            if (storeType == "1")
+            {
+                
+            }
         }
         public void ScanBarCode(string code)
         {

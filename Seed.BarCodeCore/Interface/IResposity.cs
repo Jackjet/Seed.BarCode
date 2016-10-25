@@ -10,5 +10,8 @@ namespace Seed.BarCodeCore.Interface
     {
         bool IsAnySmlCode(string code);
         bool IsAnyBigCode(string code);
+
+        void InsertList<T>(List<T> t) where T : class;
+
     }
 }
