@@ -198,14 +198,12 @@ namespace Seed.BarCodeCore.Models
             }
         }
 
-        private List<T> BarCodeTist<T>(string code) where T : Product,new()
+        private List<T> BarCodeTist<T>(string code) where T : Product, new()
         {
             List<T> list = new List<T>();
             foreach (string str in SmlCodeList.Items)
-            {   
-                T p = new T();
-                p.Batch = CurProduct.Batch;
-                p.BigCode = code;
+            {
+                T p = new T {Batch = CurProduct.Batch, BigCode = code};
                 p.ProductLine = p.ProductLine;
                 p.ProductName = p.ProductName;
                 p.SmlCode = str;
