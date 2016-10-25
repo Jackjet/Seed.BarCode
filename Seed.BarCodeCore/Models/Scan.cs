@@ -23,8 +23,8 @@ namespace Seed.BarCodeCore.Models
         private readonly string _soundType = "0";
         private readonly SoundPlayer _player = new SoundPlayer();
         public IResposity Resposity;
-        private readonly Product CurProduct;
-        private readonly SystemConfig CurConfig;
+        private readonly Product _curProduct;
+        private readonly SystemConfig _curConfig;
 
         public Scan(ListBox list,int productCount,RichTextBox info,Product product,SystemConfig config)
         {
@@ -36,8 +36,8 @@ namespace Seed.BarCodeCore.Models
             _codeType = config.CodeType;
             Info = info;
             _soundType = config.SoundType;
-            CurProduct = product;
-            CurConfig = config;
+            _curProduct = product;
+            _curConfig = config;
             if (config.StoreType == "1")
             {
                 Resposity = new SqliteResposity();            
@@ -101,7 +101,6 @@ namespace Seed.BarCodeCore.Models
                 }
             }
         }
-
         //当条码信息为二维码则需要获取第三行数据的条码
         //条码信息格式如下
 
@@ -122,14 +121,12 @@ namespace Seed.BarCodeCore.Models
             }
             return code.Substring(code.IndexOf("http", StringComparison.Ordinal) - _smlCodeLen, _smlCodeLen);
         }
-
         public void Log(string str)
         {
             if (Info.GetLineFromCharIndex(Info.Text.Length) > 8)
                 Info.Text = "";
             Info.AppendText(DateTime.Now + " " + str + "\r\n");
         }
-
         private bool IsBigCode(string code, int len)
         {
             if (code.Length == len)
@@ -144,7 +141,6 @@ namespace Seed.BarCodeCore.Models
             else
                 return false;
         }
-
         /// <summary>
         /// 播放声音
         /// </summary>
@@ -172,22 +168,17 @@ namespace Seed.BarCodeCore.Models
                 _player.Play();
             }
         }
-
-
         private bool IsAnySmlCodeInList(string code)
         {
             return SmlCodeList.Items.Cast<string>().Any(str => code == str);
         }
-
-   
-
         /// <summary>
         /// 插入条码
         /// </summary>
         /// <param name="code"></param>
         private void InsertCode(string code)
         {
-            if (CurConfig.StoreType== "1")
+            if (_curConfig.StoreType== "1")
             {              ;
                 Resposity.InsertList(BarCodeTist<Product>(code));
             }
@@ -202,7 +193,7 @@ namespace Seed.BarCodeCore.Models
             List<T> list = new List<T>();
             foreach (string str in SmlCodeList.Items)
             {
-                T p = new T {Batch = CurProduct.Batch, BigCode = code};
+                T p = new T {Batch = _curProduct.Batch, BigCode = code};
                 p.ProductLine = p.ProductLine;
                 p.ProductName = p.ProductName;
                 p.SmlCode = str;
