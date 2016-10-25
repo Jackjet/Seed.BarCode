@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Media;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Seed.BarCodeCore.Interface;
 using Seed.BarCodeCore.Resposity;
-using ListBox = System.Web.UI.WebControls.ListBox;
+using System.Windows.Forms;
 
 namespace Seed.BarCodeCore.Models
 {
@@ -194,10 +191,10 @@ namespace Seed.BarCodeCore.Models
             foreach (string str in SmlCodeList.Items)
             {
                 T p = new T {Batch = _curProduct.Batch, BigCode = code};
-                p.ProductLine = p.ProductLine;
-                p.ProductName = p.ProductName;
+                p.ProductLine = _curProduct.ProductLine;
+                p.ProductName = _curProduct.ProductName;
                 p.SmlCode = str;
-                p.Specification = p.Specification;
+                p.Specification = _curProduct.Specification;
                 list.Add(p);
             }
             return list;
