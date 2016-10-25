@@ -24,7 +24,7 @@ namespace Seed.BarCodeLine
         private readonly string _storeType = System.Configuration.ConfigurationManager.AppSettings["StoreType"];
         private readonly Product _product = new Product();
         private readonly SystemConfig _config=new SystemConfig();
-        private int _count;
+        private int _count=10000;
         public Main()
         {
             InitializeComponent();
@@ -32,30 +32,34 @@ namespace Seed.BarCodeLine
 
         private void Main_Load(object sender, EventArgs e)
         {
-            if (_storeType == "1")
+            if (_count == 10000)
             {
-                SqliteResposity resposity = new SqliteResposity();
-                _count = resposity.TodayBigCodeCount(_productLine);
+                if (_storeType == "1")
+                {
+                    SqliteResposity resposity = new SqliteResposity();
+                    _count = resposity.TodayBigCodeCount(_productLine);
+                }
+                else
+                {
+                    SqlResposity resposity = new SqlResposity();
+                    _count = resposity.TodayBigCodeCount(_productLine);
+                }
+                _product.Batch = TBatch.Text;
+                _product.ProductLine = _productLine;
+                _product.ProductName = TProductName.Text;
+                _product.Specification = TNubs.Text;
+                _config.BigCodeLen = Convert.ToInt32(_bigCodeLen);
+                _config.SmlCodeLen = Convert.ToInt32(_smlCodeLen);
+                _config.CodeType = _codeType;
+                _config.SoundType = _soundType;
+                _config.StoreType = _storeType;
+                _scan = new Scan(listCode, _count, info, _product, _config);
             }
-            else
-            {
-                SqlResposity resposity = new SqlResposity();
-                _count = resposity.TodayBigCodeCount(_productLine);
-            }
-            _product.Batch = TBatch.Text;
-            _product.ProductLine = _productLine;
-            _product.ProductName = TProductName.Text;
-            _product.Specification =TNubs.Text;
-            _config.BigCodeLen = Convert.ToInt32(_bigCodeLen);
-            _config.SmlCodeLen = Convert.ToInt32(_smlCodeLen);
-            _config.CodeType = _codeType;
-            _config.SoundType = _soundType;
-            _config.StoreType = _storeType;
-            _scan = new Scan(listCode, _count, info, _product, _config);
         }
 
         private void Tcode_KeyDown(object sender, KeyEventArgs e)
         {
+          
             if (e.KeyCode == Keys.Enter)
             {
                 e.Handled = true;

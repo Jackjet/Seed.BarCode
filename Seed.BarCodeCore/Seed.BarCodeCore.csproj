@@ -95,7 +95,9 @@
     <Compile Include="Resposity\SqlResposity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Lib\System.Data.SQLite.dll" />
+    <Content Include="Lib\System.Data.SQLite.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Lib\System.Data.SQLite.xml" />
   </ItemGroup>
   <ItemGroup>
