@@ -13,6 +13,6 @@ namespace Seed.BarCodeCore.Interface
 
         void InsertList<T>(List<T> t) where T : class;
 
-        int TodayBigCodeCount();
+        int TodayBigCodeCount(string productLine);
     }
 }

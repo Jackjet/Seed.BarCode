@@ -36,7 +36,7 @@ namespace Seed.BarCodeCore.Resposity
             }
         }
 
-        public int TodayBigCodeCount()
+        public int TodayBigCodeCount(string productLine)
         {
             using (var db = SugarDao.GetInstance())
             {
@@ -45,6 +45,26 @@ namespace Seed.BarCodeCore.Resposity
                     .Where("datediff(day,ProductTime,getdate())=0").ToList()
                     .Count();
   
+            }
+        }
+
+        public int LastUpdateInfo(string productLine)
+        {
+            using (var db = SugarDao.GetInstance())
+            {
+                Products code =
+                      db.Queryable<Products>()
+                          .Where(it => it.ProductLine == productLine)
+                          .OrderBy("Id desc")
+                          .FirstOrDefault();
+                if (code != null)
+                {
+                    return Convert.ToInt32(code.Status);
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
     }

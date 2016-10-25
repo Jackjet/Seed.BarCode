@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LName = new System.Windows.Forms.Label();
             this.TProductName = new System.Windows.Forms.TextBox();
+            this.BtUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listCode
@@ -129,11 +130,24 @@
             this.TProductName.TabIndex = 11;
             this.TProductName.Text = "天优华占";
             // 
+            // BtUpdate
+            // 
+            this.BtUpdate.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.BtUpdate.Location = new System.Drawing.Point(196, 352);
+            this.BtUpdate.Margin = new System.Windows.Forms.Padding(4);
+            this.BtUpdate.Name = "BtUpdate";
+            this.BtUpdate.Size = new System.Drawing.Size(259, 42);
+            this.BtUpdate.TabIndex = 16;
+            this.BtUpdate.Text = "上传服务器";
+            this.BtUpdate.UseVisualStyleBackColor = true;
+            this.BtUpdate.Click += new System.EventHandler(this.BtUpdate_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(713, 407);
+            this.Controls.Add(this.BtUpdate);
             this.Controls.Add(this.TBatch);
             this.Controls.Add(this.TNubs);
             this.Controls.Add(this.label2);
@@ -164,6 +178,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label LName;
         private System.Windows.Forms.TextBox TProductName;
+        private System.Windows.Forms.Button BtUpdate;
     }
 }
 

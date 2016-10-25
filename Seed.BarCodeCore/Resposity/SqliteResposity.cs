@@ -36,7 +36,7 @@ namespace Seed.BarCodeCore.Resposity
             }
         }
 
-        public int TodayBigCodeCount()
+        public int TodayBigCodeCount(string productLine)
         {
             string day = string.Format("{0:yyyyMMdd}", DateTime.Now);
             using (var db = SugarDao.GetInstance())
@@ -56,6 +56,26 @@ namespace Seed.BarCodeCore.Resposity
                     });
                     return 0;
                 }
+            }
+        }
+
+        public List<Products> CodeUpdate(int maxId)
+        {
+            using (var db = SugarDao.GetInstance())
+            {
+                return db.Queryable<Product>().Where(it => it.Id > maxId).OrderBy("Id")
+                    .Take(50000).ToList()
+                .Select(it => new Products
+                {
+                    BigCode = it.BigCode,
+                    SmlCode = it.SmlCode,
+                    Batch = it.Batch,
+                    ProductName = it.ProductName,
+                    Specification= it.Specification,
+                    ProductLine = it.ProductLine,
+                    ProductTime=it.ProductTime,
+                    Status = it.Id.ObjToString()
+                }).ToList();
             }
         }
     }

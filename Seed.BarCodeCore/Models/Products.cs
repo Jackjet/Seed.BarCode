@@ -9,8 +9,11 @@ namespace Seed.BarCodeCore.Models
 {
     public class Products:Product,IService
     {
+        
         public string Gid { get; set; }
 
         public string Status { get; set; }
+
+        
     }
 }

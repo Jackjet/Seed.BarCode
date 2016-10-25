@@ -20,6 +20,7 @@ namespace Seed.BarCodeCore.Models
         public Product()
         {
             ProductTime = DateTime.Now;
+            
         }
     }
 }

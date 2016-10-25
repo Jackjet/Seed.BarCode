@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Seed.BarCodeCore.Models;
@@ -34,12 +35,12 @@ namespace Seed.BarCodeLine
             if (_storeType == "1")
             {
                 SqliteResposity resposity = new SqliteResposity();
-                _count = resposity.TodayBigCodeCount();
+                _count = resposity.TodayBigCodeCount(_productLine);
             }
             else
             {
                 SqlResposity resposity = new SqlResposity();
-                _count = resposity.TodayBigCodeCount();
+                _count = resposity.TodayBigCodeCount(_productLine);
             }
             _product.Batch = TBatch.Text;
             _product.ProductLine = _productLine;
@@ -65,6 +66,31 @@ namespace Seed.BarCodeLine
             }
         }
 
+        private void BtUpdate_Click(object sender, EventArgs e)
+        {
+            BtUpdate.Enabled = false;
+            Thread thread = new Thread(new ThreadStart(LoadData));
+            thread.IsBackground = true;
+            thread.Start();
+        }
+
+        private void LoadData()
+        {
+            DateTime beforDt = DateTime.Now;
+            SqlResposity res = new SqlResposity();
+            int maxId = res.LastUpdateInfo(_productLine);
+            SqliteResposity re = new SqliteResposity();
+            List<Products> list = re.CodeUpdate(maxId);
+            res.InsertList(list);
+
+            this.BeginInvoke(new MethodInvoker(delegate()
+            {
+                BtUpdate.Enabled = true;
+                DateTime afterDt = DateTime.Now;
+                TimeSpan ts = afterDt.Subtract(beforDt);
+                _scan.Log("上传数据花费：" + ts.TotalSeconds + ".s");
+            }));
+        }
        
     }
 }
