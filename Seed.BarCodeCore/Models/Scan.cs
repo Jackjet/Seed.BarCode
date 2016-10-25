@@ -16,15 +16,15 @@ namespace Seed.BarCodeCore.Models
         public ListBox SmlCodeList;
         public RichTextBox Info;
         public int Count { get; set; }
-        private int _bigCodeLen=10;
-        private int _smlCodeLen=12;
-        private int _specification = 30;
-        private string _codeType = "1";
-        private string _soundType = "0";
+        private readonly int _bigCodeLen=10;
+        private readonly int _smlCodeLen=12;
+        private readonly int _specification = 30;
+        private readonly string _codeType = "1";
+        private readonly string _soundType = "0";
         private readonly SoundPlayer _player = new SoundPlayer();
         public IResposity Resposity;
-        private Product CurProduct;
-        private SystemConfig CurConfig;
+        private readonly Product CurProduct;
+        private readonly SystemConfig CurConfig;
 
         public Scan(ListBox list,int productCount,RichTextBox info,Product product,SystemConfig config)
         {
@@ -187,7 +187,6 @@ namespace Seed.BarCodeCore.Models
         /// <param name="code"></param>
         private void InsertCode(string code)
         {
-
             if (CurConfig.StoreType== "1")
             {              ;
                 Resposity.InsertList(BarCodeTist<Product>(code));
