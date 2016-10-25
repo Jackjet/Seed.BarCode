@@ -73,6 +73,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\IProductConfig.cs" />
+    <Compile Include="Models\Products.cs" />
+    <Compile Include="Models\SystemConfig.cs" />
     <Compile Include="Resposity\SqliteResposity.cs" />
     <Compile Include="SqliteDao\SqliteSugarDao.cs" />
     <Compile Include="Dao\SugarDao.cs" />

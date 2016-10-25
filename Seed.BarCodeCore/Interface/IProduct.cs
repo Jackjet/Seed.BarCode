@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace Seed.BarCodeCore.Interface
 {
-    public interface IProduct:ICode
+    public interface IProduct:ICode,IProductConfig
     {
-        string Specification { get; set; }
-        string ProductLine { get; set; }
-        DateTime ProductTime { get; set; }
+     
     }
 }

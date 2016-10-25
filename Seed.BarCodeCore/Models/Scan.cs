@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Seed.BarCodeCore.Interface;
+using Seed.BarCodeCore.Resposity;
 using ListBox = System.Web.UI.WebControls.ListBox;
 
 namespace Seed.BarCodeCore.Models
@@ -21,21 +22,29 @@ namespace Seed.BarCodeCore.Models
         private string _codeType = "1";
         private string _soundType = "0";
         private readonly SoundPlayer _player = new SoundPlayer();
-        public IResposity Res;
+        public IResposity Resposity;
+        private Product CurProduct;
+        private SystemConfig CurConfig;
 
-        public Scan(ListBox list,int productCount,int bigCodeLen,int smlCodeLen,int specification,string codeType,RichTextBox info,string soundType,string storeType)
+        public Scan(ListBox list,int productCount,RichTextBox info,Product product,SystemConfig config)
         {
             SmlCodeList = list;
             Count = productCount;
-            _bigCodeLen = bigCodeLen;
-            _smlCodeLen = smlCodeLen;
-            _specification = specification;
-            _codeType = codeType;
+            _bigCodeLen = config.BigCodeLen;
+            _smlCodeLen = config.SmlCodeLen;
+            _specification = Convert.ToInt32(product.Specification);
+            _codeType = config.CodeType;
             Info = info;
-            _soundType = soundType;
-            if (storeType == "1")
+            _soundType = config.SoundType;
+            CurProduct = product;
+            CurConfig = config;
+            if (config.StoreType == "1")
             {
-                
+                Resposity = new SqliteResposity();            
+            }
+            else
+            {
+                Resposity = new SqlResposity();
             }
         }
         public void ScanBarCode(string code)
@@ -44,7 +53,7 @@ namespace Seed.BarCodeCore.Models
             {
                 if (IsBigCode(code, _bigCodeLen))
                 {
-                    if (!IsAnyBigCode(code))
+                    if (!Resposity.IsAnyBigCode(code))
                     {
                         Count++;
                         InsertCode(code);
@@ -73,7 +82,7 @@ namespace Seed.BarCodeCore.Models
                 }
                 else
                 {
-                    if (IsAnySmlCode(code))
+                    if (Resposity.IsAnySmlCode(code))
                     {
                         Log("数据库中存在相同的条码");
                     }
@@ -121,7 +130,7 @@ namespace Seed.BarCodeCore.Models
             Info.AppendText(DateTime.Now + " " + str + "\r\n");
         }
 
-        public bool IsBigCode(string code, int len)
+        private bool IsBigCode(string code, int len)
         {
             if (code.Length == len)
                 return true;
@@ -164,51 +173,13 @@ namespace Seed.BarCodeCore.Models
             }
         }
 
-        /// <summary>
-        /// 当前件已扫描的条码是否跟当前条码重复
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        public bool IsAnySmlCode(string code)
-        {
-            //if (_storeType == "1")
-            //{
-            //    LongkeCodeResposities res = new LongkeCodeResposities();
-            //    return res.IsAnySmlCode(code);
-            //}
-            //else
-            //{
-            //    LongkeCodesResposities res = new LongkeCodesResposities();
-            //    return res.IsAnySmlCode(code);
-            //}
-            return true;
-        }
 
-        public bool IsAnySmlCodeInList(string code)
+        private bool IsAnySmlCodeInList(string code)
         {
             return SmlCodeList.Items.Cast<string>().Any(str => code == str);
         }
 
-        /// <summary>
-        /// 查询是否已有大条码
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        public bool IsAnyBigCode(string code)
-        {
-            //if (_storeType == "1")
-            //{
-            //    LongkeCodeResposities res = new LongkeCodeResposities();
-            //    return res.IsAnyBigCode(code);
-            //}
-            //else
-            //{
-            //    LongkeCodesResposities res = new LongkeCodesResposities();
-            //    return res.IsAnyBigCode(code);
-            //}
-            return true;
-        }
-
+   
 
         /// <summary>
         /// 插入条码
@@ -216,26 +187,32 @@ namespace Seed.BarCodeCore.Models
         /// <param name="code"></param>
         private void InsertCode(string code)
         {
-            //if (_storeType == "1")
-            //{
-            //    NcHandCode longke = new NcHandCode();
-            //    longke.BoxNubs = Nubs.Text;
-            //    longke.Patch = Patch.Text;
-            //    longke.ProductName = TProductName.Text;
-            //    longke.ProductLine = _productLine;
-            //    LongkeCodeResposities res = new LongkeCodeResposities();
-            //    res.InsertCodes(code, SmlCodeList, longke, _productNubs);
-            //}
-            //else
-            //{
-            //    NcHandCodes longke = new NcHandCodes();
-            //    longke.BoxNubs = Nubs.Text;
-            //    longke.Patch = Patch.Text;
-            //    longke.ProductName = TProductName.Text;
-            //    longke.ProductLine = _productLine;
-            //    LongkeCodesResposities res = new LongkeCodesResposities();
-            //    res.InsertCodes(code, SmlCodeList, longke);
-            //}
+
+            if (CurConfig.StoreType== "1")
+            {              ;
+                Resposity.InsertList(BarCodeTist<Product>(code));
+            }
+            else
+            {
+                Resposity.InsertList(BarCodeTist<Products>(code));
+            }
+        }
+
+        private List<T> BarCodeTist<T>(string code) where T : Product,new()
+        {
+            List<T> list = new List<T>();
+            foreach (string str in SmlCodeList.Items)
+            {   
+                T p = new T();
+                p.Batch = CurProduct.Batch;
+                p.BigCode = code;
+                p.ProductLine = p.ProductLine;
+                p.ProductName = p.ProductName;
+                p.SmlCode = str;
+                p.Specification = p.Specification;
+                list.Add(p);
+            }
+            return list;
         }
     }
 }

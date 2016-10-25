@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace Seed.BarCodeCore.Interface
 {
-    public interface IScan
+    public interface IProductConfig
     {
-        void ScanBarCode(string code);
-
-        void Log(string str);
-    
-
+        string Specification { get; set; }
+        string ProductLine { get; set; }
+        DateTime ProductTime { get; set; }
     }
 }
