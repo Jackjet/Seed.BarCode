@@ -35,5 +35,17 @@ namespace Seed.BarCodeCore.Resposity
                 db.SqlBulkCopy(t);
             }
         }
+
+        public int TodayBigCodeCount()
+        {
+            using (var db = SugarDao.GetInstance())
+            {
+                return
+                db.Queryable<Products>().Select("distinct BigCode")
+                    .Where("datediff(day,ProductTime,getdate())=0").ToList()
+                    .Count();
+  
+            }
+        }
     }
 }

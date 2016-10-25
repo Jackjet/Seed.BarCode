@@ -8,21 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Seed.BarCodeCore.Models;
+using Seed.BarCodeCore.Resposity;
 
 namespace Seed.BarCodeLine
 {
     public partial class Main : Form
     {
-        private Scan Scan;
+        private Scan _scan;
         private readonly string _soundType = System.Configuration.ConfigurationManager.AppSettings["MusicType"];
         private readonly string _bigCodeLen = System.Configuration.ConfigurationManager.AppSettings["BigCodeLen"];
         private readonly string _smlCodeLen = System.Configuration.ConfigurationManager.AppSettings["SmlCodeLen"];
         private readonly string _codeType = System.Configuration.ConfigurationManager.AppSettings["SmlCodeType"];
         private readonly string _productLine = System.Configuration.ConfigurationManager.AppSettings["ProductLine"];
         private readonly string _storeType = System.Configuration.ConfigurationManager.AppSettings["StoreType"];
-        private Product product = new Product();
-        private int Count;
-        private SystemConfig config=new SystemConfig();
+        private readonly Product _product = new Product();
+        private readonly SystemConfig _config=new SystemConfig();
+        private int _count;
         public Main()
         {
             InitializeComponent();
@@ -30,16 +31,26 @@ namespace Seed.BarCodeLine
 
         private void Main_Load(object sender, EventArgs e)
         {
-            product.Batch = TBatch.Text;
-            product.ProductLine = _productLine;
-            product.ProductName = TProductName.Text;
-            product.Specification =TNubs.Text;
-            config.BigCodeLen = Convert.ToInt32(_bigCodeLen);
-            config.SmlCodeLen = Convert.ToInt32(_smlCodeLen);
-            config.CodeType = _codeType;
-            config.SoundType = _soundType;
-            config.StoreType = _soundType;
-            Scan = new Scan(listCode, Count, info, product, config);
+            if (_storeType == "1")
+            {
+                SqliteResposity resposity = new SqliteResposity();
+                _count = resposity.TodayBigCodeCount();
+            }
+            else
+            {
+                SqlResposity resposity = new SqlResposity();
+                _count = resposity.TodayBigCodeCount();
+            }
+            _product.Batch = TBatch.Text;
+            _product.ProductLine = _productLine;
+            _product.ProductName = TProductName.Text;
+            _product.Specification =TNubs.Text;
+            _config.BigCodeLen = Convert.ToInt32(_bigCodeLen);
+            _config.SmlCodeLen = Convert.ToInt32(_smlCodeLen);
+            _config.CodeType = _codeType;
+            _config.SoundType = _soundType;
+            _config.StoreType = _storeType;
+            _scan = new Scan(listCode, _count, info, _product, _config);
         }
 
         private void Tcode_KeyDown(object sender, KeyEventArgs e)
@@ -47,9 +58,9 @@ namespace Seed.BarCodeLine
             if (e.KeyCode == Keys.Enter)
             {
                 e.Handled = true;
-                Scan.ScanBarCode(Tcode.Text.Trim());
+                _scan.ScanBarCode(Tcode.Text.Trim());
                 if (listCode.Items.Count == 0)
-                    Scan.Log("今天已经包装" + Count + "件");
+                    _scan.Log("今天已经包装" + _scan.Count + "件");
                 Tcode.Text = "";
             }
         }
