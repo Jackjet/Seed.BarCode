@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.listCode = new System.Windows.Forms.ListBox();
             this.Tcode = new System.Windows.Forms.TextBox();
             this.info = new System.Windows.Forms.RichTextBox();
@@ -158,6 +159,7 @@
             this.Controls.Add(this.Tcode);
             this.Controls.Add(this.listCode);
             this.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.Name = "Main";
             this.Text = "通用扫描";
