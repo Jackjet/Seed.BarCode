@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Seed.BarCodeCore.Interface;
+using Seed.BarCodeCore.Models;
+using Seed.BarCodeCore.SqliteDao;
+using SQLiteSugar;
 
 namespace Seed.BarCodeCore.Resposity
 {
@@ -11,17 +14,26 @@ namespace Seed.BarCodeCore.Resposity
     {
         public bool IsAnySmlCode(string code)
         {
-            return true;
+            using (var db = SugarDao.GetInstance())
+            {
+                return db.Queryable<Product>().Any(it => it.SmlCode == code);
+            }
         }
 
         public bool IsAnyBigCode(string code)
         {
-            return true;
+            using (var db = SugarDao.GetInstance())
+            {
+                return db.Queryable<Product>().Any(it => it.SmlCode == code);
+            }
         }
 
         public void InsertList<T>(List<T> t) where T : class
         {
-            
+            using (var db = SugarDao.GetInstance())
+            {
+                db.SqlBulkCopy(t);
+            }
         }
     }
 }
