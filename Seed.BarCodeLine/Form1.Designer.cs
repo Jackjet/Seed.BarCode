@@ -87,6 +87,7 @@
             this.TNubs.Size = new System.Drawing.Size(195, 29);
             this.TNubs.TabIndex = 10;
             this.TNubs.Text = "30";
+            this.TNubs.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TNubs_KeyPress);
             // 
             // label2
             // 

@@ -15,13 +15,12 @@ namespace Seed.BarCodeCore.Models
         public int Count { get; set; }
         private readonly int _bigCodeLen;
         private readonly int _smlCodeLen;
-        private readonly int _specification;
         private readonly string _codeType ;
         private readonly string _soundType ;
         private readonly SoundPlayer _player = new SoundPlayer();
         public IResposity Resposity;
-        private readonly Product _curProduct;
-        private readonly SystemConfig _curConfig;
+        public Product _curProduct;
+        public SystemConfig _curConfig;
 
         public Scan(ListBox list,int productCount,RichTextBox info,Product product,SystemConfig config)
         {
@@ -29,7 +28,6 @@ namespace Seed.BarCodeCore.Models
             Count = productCount;
             _bigCodeLen = config.BigCodeLen;
             _smlCodeLen = config.SmlCodeLen;
-            _specification = Convert.ToInt32(product.Specification);
             _codeType = config.CodeType;
             Info = info;
             _soundType = config.SoundType;
@@ -46,7 +44,7 @@ namespace Seed.BarCodeCore.Models
         }
         public void ScanBarCode(string code)
         {
-            if (SmlCodeList != null && IsBagFull(SmlCodeList.Items.Count, _specification))
+            if (SmlCodeList != null && IsBagFull(SmlCodeList.Items.Count,Convert.ToInt32( _curProduct.Specification)))
             {
                 if (IsBigCode(code, _bigCodeLen))
                 {
@@ -191,7 +189,7 @@ namespace Seed.BarCodeCore.Models
             foreach (string str in SmlCodeList.Items)
             {
                 T p = new T {Batch = _curProduct.Batch, BigCode = code};
-                p.ProductLine = _curProduct.ProductLine;
+                p.ProductLine = _curConfig.ProductLine;
                 p.ProductName = _curProduct.ProductName;
                 p.SmlCode = str;
                 p.Specification = _curProduct.Specification;

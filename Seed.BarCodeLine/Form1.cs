@@ -22,9 +22,9 @@ namespace Seed.BarCodeLine
         private readonly string _codeType = System.Configuration.ConfigurationManager.AppSettings["SmlCodeType"];
         private readonly string _productLine = System.Configuration.ConfigurationManager.AppSettings["ProductLine"];
         private readonly string _storeType = System.Configuration.ConfigurationManager.AppSettings["StoreType"];
-        private readonly Product _product = new Product();
-        private readonly SystemConfig _config=new SystemConfig();
-        private int _count=10000;
+        public  Product _product = new Product();
+        public SystemConfig _config=new SystemConfig();
+        private int _count=0;
         public Main()
         {
             InitializeComponent();
@@ -32,8 +32,6 @@ namespace Seed.BarCodeLine
 
         private void Main_Load(object sender, EventArgs e)
         {
-            if (_count == 10000)
-            {
                 if (_storeType == "1")
                 {
                     SqliteResposity resposity = new SqliteResposity();
@@ -44,26 +42,24 @@ namespace Seed.BarCodeLine
                     SqlResposity resposity = new SqlResposity();
                     _count = resposity.TodayBigCodeCount(_productLine);
                 }
-                _product.Batch = TBatch.Text;
                 _product.ProductLine = _productLine;
-                _product.ProductName = TProductName.Text;
-                _product.Specification = TNubs.Text;
                 _config.BigCodeLen = Convert.ToInt32(_bigCodeLen);
                 _config.SmlCodeLen = Convert.ToInt32(_smlCodeLen);
                 _config.CodeType = _codeType;
                 _config.SoundType = _soundType;
                 _config.StoreType = _storeType;
-                _scan = new Scan(listCode, _count, info, _product, _config);
-            }
+                _scan = new Scan(listCode, _count, info, _product, _config);           
         }
 
         private void Tcode_KeyDown(object sender, KeyEventArgs e)
-        {
-          
+        {         
             if (e.KeyCode == Keys.Enter)
             {
                 e.Handled = true;
+                _scan._curProduct.ProductName = TProductName.Text;
+                _scan._curProduct.Batch = TBatch.Text;
                 _scan.ScanBarCode(Tcode.Text.Trim());
+                _scan._curProduct.Specification = TNubs.Text;
                 if (listCode.Items.Count == 0)
                     _scan.Log("今天已经包装" + _scan.Count + "件");
                 Tcode.Text = "";
@@ -73,8 +69,7 @@ namespace Seed.BarCodeLine
         private void BtUpdate_Click(object sender, EventArgs e)
         {
             BtUpdate.Enabled = false;
-            Thread thread = new Thread(new ThreadStart(LoadData));
-            thread.IsBackground = true;
+            Thread thread = new Thread(new ThreadStart(LoadData)) {IsBackground = true};
             thread.Start();
         }
 
@@ -95,6 +90,21 @@ namespace Seed.BarCodeLine
                 _scan.Log("上传数据花费：" + ts.TotalSeconds + ".s");
             }));
         }
+
+ 
+        private void TNubs_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+                _scan.Log("请输入数字");
+                
+            }
+  
+        }
+
+   
        
     }
 }
