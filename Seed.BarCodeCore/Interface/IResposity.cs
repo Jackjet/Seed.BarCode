@@ -14,5 +14,7 @@ namespace Seed.BarCodeCore.Interface
         void InsertList<T>(List<T> t) where T : class;
 
         int TodayBigCodeCount(string productLine);
+
+        void UpdateCount(int count);
     }
 }

@@ -177,6 +177,7 @@ namespace Seed.BarCodeCore.Models
             if (_curConfig.StoreType== "1")
             {              ;
                 Resposity.InsertList(BarCodeTist<Product>(code));
+                Resposity.UpdateCount(Count);
             }
             else
             {

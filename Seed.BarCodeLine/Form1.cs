@@ -48,7 +48,9 @@ namespace Seed.BarCodeLine
                 _config.CodeType = _codeType;
                 _config.SoundType = _soundType;
                 _config.StoreType = _storeType;
-                _scan = new Scan(listCode, _count, info, _product, _config);           
+                _scan = new Scan(listCode, _count, info, _product, _config);
+            Tcode.Focus();
+            _scan.Log("今天已包装" + _count + "件");
         }
 
         private void Tcode_KeyDown(object sender, KeyEventArgs e)
@@ -58,8 +60,8 @@ namespace Seed.BarCodeLine
                 e.Handled = true;
                 _scan._curProduct.ProductName = TProductName.Text;
                 _scan._curProduct.Batch = TBatch.Text;
-                _scan.ScanBarCode(Tcode.Text.Trim());
                 _scan._curProduct.Specification = TNubs.Text;
+                _scan.ScanBarCode(Tcode.Text.Trim());
                 if (listCode.Items.Count == 0)
                     _scan.Log("今天已经包装" + _scan.Count + "件");
                 Tcode.Text = "";

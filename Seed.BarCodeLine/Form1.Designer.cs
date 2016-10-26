@@ -49,14 +49,14 @@
             this.listCode.Location = new System.Drawing.Point(12, 51);
             this.listCode.Name = "listCode";
             this.listCode.Size = new System.Drawing.Size(166, 344);
-            this.listCode.TabIndex = 0;
+            this.listCode.TabIndex = 1;
             // 
             // Tcode
             // 
             this.Tcode.Location = new System.Drawing.Point(13, 13);
             this.Tcode.Name = "Tcode";
             this.Tcode.Size = new System.Drawing.Size(165, 34);
-            this.Tcode.TabIndex = 1;
+            this.Tcode.TabIndex = 0;
             this.Tcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Tcode_KeyDown);
             // 
             // info
@@ -64,7 +64,7 @@
             this.info.Location = new System.Drawing.Point(476, 16);
             this.info.Name = "info";
             this.info.Size = new System.Drawing.Size(222, 379);
-            this.info.TabIndex = 2;
+            this.info.TabIndex = 9;
             this.info.Text = "";
             // 
             // TBatch
@@ -74,7 +74,7 @@
             this.TBatch.Margin = new System.Windows.Forms.Padding(4);
             this.TBatch.Name = "TBatch";
             this.TBatch.Size = new System.Drawing.Size(195, 29);
-            this.TBatch.TabIndex = 12;
+            this.TBatch.TabIndex = 7;
             this.TBatch.Text = "16101301";
             // 
             // TNubs
@@ -85,7 +85,7 @@
             this.TNubs.MaxLength = 3;
             this.TNubs.Name = "TNubs";
             this.TNubs.Size = new System.Drawing.Size(195, 29);
-            this.TNubs.TabIndex = 10;
+            this.TNubs.TabIndex = 3;
             this.TNubs.Text = "30";
             this.TNubs.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TNubs_KeyPress);
             // 
@@ -97,7 +97,7 @@
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 21);
-            this.label2.TabIndex = 13;
+            this.label2.TabIndex = 2;
             this.label2.Text = "规格：";
             // 
             // label1
@@ -108,7 +108,7 @@
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 21);
-            this.label1.TabIndex = 15;
+            this.label1.TabIndex = 6;
             this.label1.Text = "批次：";
             // 
             // LName
@@ -119,7 +119,7 @@
             this.LName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LName.Name = "LName";
             this.LName.Size = new System.Drawing.Size(58, 21);
-            this.LName.TabIndex = 14;
+            this.LName.TabIndex = 4;
             this.LName.Text = "品种：";
             // 
             // TProductName
@@ -129,7 +129,7 @@
             this.TProductName.Margin = new System.Windows.Forms.Padding(4);
             this.TProductName.Name = "TProductName";
             this.TProductName.Size = new System.Drawing.Size(195, 29);
-            this.TProductName.TabIndex = 11;
+            this.TProductName.TabIndex = 5;
             this.TProductName.Text = "天优华占";
             // 
             // BtUpdate
@@ -139,7 +139,7 @@
             this.BtUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.BtUpdate.Name = "BtUpdate";
             this.BtUpdate.Size = new System.Drawing.Size(259, 42);
-            this.BtUpdate.TabIndex = 16;
+            this.BtUpdate.TabIndex = 8;
             this.BtUpdate.Text = "上传服务器";
             this.BtUpdate.UseVisualStyleBackColor = true;
             this.BtUpdate.Click += new System.EventHandler(this.BtUpdate_Click);

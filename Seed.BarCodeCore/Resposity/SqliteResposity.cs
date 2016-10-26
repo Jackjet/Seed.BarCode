@@ -78,5 +78,15 @@ namespace Seed.BarCodeCore.Resposity
                 }).ToList();
             }
         }
+
+        public void UpdateCount(int count)
+        {
+            var day = string.Format("{0:yyyyMMdd}", DateTime.Now);
+            using (var db = SugarDao.GetInstance())
+            {
+                db.Update<ProductCount>(new { Counts = count }, it => it.Days == day);
+            }
+           
+        }
     }
 }

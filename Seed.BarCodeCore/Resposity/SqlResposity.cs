@@ -67,5 +67,10 @@ namespace Seed.BarCodeCore.Resposity
                 }
             }
         }
+
+        public void UpdateCount(int count)
+        {
+            
+        }
     }
 }
