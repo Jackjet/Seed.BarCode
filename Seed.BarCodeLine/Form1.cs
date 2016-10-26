@@ -36,11 +36,25 @@ namespace Seed.BarCodeLine
                 {
                     SqliteResposity resposity = new SqliteResposity();
                     _count = resposity.TodayBigCodeCount(_productLine);
+                    Product p = resposity.LastProduct<Product>();
+                    if (p != null)
+                    {
+                        TNubs.Text = p.Specification;
+                        TProductName.Text = p.ProductName;
+                        TBatch.Text = p.Batch;
+                    }
                 }
                 else
                 {
                     SqlResposity resposity = new SqlResposity();
                     _count = resposity.TodayBigCodeCount(_productLine);
+                    Products p = resposity.LastProduct<Products>();
+                    if (p != null)
+                    {
+                        TNubs.Text = p.Specification;
+                        TProductName.Text = p.ProductName;
+                        TBatch.Text = p.Batch;
+                    }
                 }
                 _product.ProductLine = _productLine;
                 _config.BigCodeLen = Convert.ToInt32(_bigCodeLen);

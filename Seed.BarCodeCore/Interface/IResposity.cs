@@ -16,5 +16,8 @@ namespace Seed.BarCodeCore.Interface
         int TodayBigCodeCount(string productLine);
 
         void UpdateCount(int count);
+
+        T LastProduct<T>() where T : new();
+
     }
 }

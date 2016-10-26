@@ -10,7 +10,7 @@ namespace Seed.BarCodeCore.SqliteDao
         }
         public static SQLiteSugar.SqlSugarClient GetInstance()
         {
-            string connection = "DataSource=" + System.AppDomain.CurrentDomain.BaseDirectory + "database\\BarCode.s3db"; ; //这里可以动态根据cookies或session实现多库切换
+            string connection = "DataSource=" + System.AppDomain.CurrentDomain.BaseDirectory + "database\\BarCode1.s3db"; ; //这里可以动态根据cookies或session实现多库切换
             return new SqlSugarClient(connection);
         }
     }

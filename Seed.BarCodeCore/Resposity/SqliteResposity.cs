@@ -88,5 +88,13 @@ namespace Seed.BarCodeCore.Resposity
             }
            
         }
+
+        public T LastProduct<T>() where T:new()
+        {
+            using (var db = SugarDao.GetInstance())
+            {            
+                return db.Queryable<T>().OrderBy("Id desc").FirstOrDefault();               
+            }
+        }
     }
 }

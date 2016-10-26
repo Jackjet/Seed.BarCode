@@ -17,10 +17,6 @@ namespace Seed.BarCodeCore.Models
         public string Specification { get; set; }
         public string ProductLine { get; set; }
         public DateTime ProductTime { get; set; }
-        public Product()
-        {
-            ProductTime = DateTime.Now;
-            
-        }
+     
     }
 }

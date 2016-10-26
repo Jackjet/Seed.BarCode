@@ -194,6 +194,7 @@ namespace Seed.BarCodeCore.Models
                 p.ProductName = _curProduct.ProductName;
                 p.SmlCode = str;
                 p.Specification = _curProduct.Specification;
+                p.ProductTime = DateTime.Now;
                 list.Add(p);
             }
             return list;
