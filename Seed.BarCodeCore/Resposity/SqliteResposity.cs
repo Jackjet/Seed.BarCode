@@ -32,7 +32,8 @@ namespace Seed.BarCodeCore.Resposity
         {
             using (var db = SugarDao.GetInstance())
             {
-                db.SqlBulkCopy(t);
+               // db.SqlBulkCopy(t);
+                db.InsertRange(t);
             }
         }
 
