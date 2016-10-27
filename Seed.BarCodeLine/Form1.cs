@@ -56,7 +56,7 @@ namespace Seed.BarCodeLine
                         TBatch.Text = p.Batch;
                     }
                 }
-                _product.ProductLine = _productLine;
+                _config.ProductLine = _productLine;
                 _config.BigCodeLen = Convert.ToInt32(_bigCodeLen);
                 _config.SmlCodeLen = Convert.ToInt32(_smlCodeLen);
                 _config.CodeType = _codeType;
