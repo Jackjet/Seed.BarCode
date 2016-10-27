@@ -114,8 +114,7 @@ namespace Seed.BarCodeLine
             if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)8)
             {
                 e.Handled = true;
-                _scan.Log("请输入数字");
-                
+                _scan.Log("请输入数字");               
             }
   
         }

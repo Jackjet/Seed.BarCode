@@ -92,7 +92,8 @@ namespace Seed.BarCodeCore.Resposity
         public T LastProduct<T>() where T:new()
         {
             using (var db = SugarDao.GetInstance())
-            {            
+            {
+                var str = db.Queryable<Product>().OrderBy("Id desc").FirstOrDefault();
                 return db.Queryable<T>().OrderBy("Id desc").FirstOrDefault();               
             }
         }
