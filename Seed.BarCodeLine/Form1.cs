@@ -93,7 +93,8 @@ namespace Seed.BarCodeLine
         {
             DateTime beforDt = DateTime.Now;
             SqlResposity res = new SqlResposity();
-            int maxId = res.LastUpdateInfo(_productLine);
+           // int maxId = res.LastUpdateInfo(_productLine);
+            int maxId = res.LastUpdateId<Products>(_productLine);
             SqliteResposity re = new SqliteResposity();
             List<Products> list = re.CodeUpdate(maxId);
             res.InsertList(list);

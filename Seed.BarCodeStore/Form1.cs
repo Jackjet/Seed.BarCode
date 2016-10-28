@@ -7,10 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using NPOI.SS.Formula.Functions;
-using Seed.StockOutScan.Models;
-using Seed.BarCodeStore.Public;
-using Seed.BarCodeStore.Reposities;
+using Seed.BarCodeCore.Models;
+using Seed.BarCodeCore.Resposity;
+
 
 namespace Seed.BarCodeStore
 {
@@ -35,7 +34,7 @@ namespace Seed.BarCodeStore
         {
             if (openFile.ShowDialog(this) == DialogResult.OK)
             {
-                CodeHelp code = new CodeHelp();
+                CodeScanHelp code = new CodeScanHelp();
                 code.ReadPt850(openFile.FileName, _fileUrl);
             }
         }
@@ -49,12 +48,13 @@ namespace Seed.BarCodeStore
 
         public void LoadStockData()
         {
+            string productLine = System.Configuration.ConfigurationManager.AppSettings["ProductLine"];
             DateTime beforDt = DateTime.Now;
-            NcSaleInfoResposities res = new NcSaleInfoResposities();
-            int maxId = res.LastUpdateInfo();
-            NcHandSaleInfoResposities re = new NcHandSaleInfoResposities();
-            List<NcSaleInfo> list = re.Update(maxId);
-            res.InsertCodes(list);
+            SqlResposity res = new SqlResposity();
+            int maxId = res.LastUpdateId<Stores>(productLine);
+            SqliteResposity re = new SqliteResposity();
+            List<Stores> list = re.StoreUpdate(maxId);
+            res.InsertList(list);
 
             this.BeginInvoke(new MethodInvoker(delegate()
             {
@@ -70,9 +70,9 @@ namespace Seed.BarCodeStore
             if (openFile.ShowDialog(this) == DialogResult.OK)
             {
                 ExcelHelper eh = new ExcelHelper(openFile.FileName);
-                List<NcSaleBase> list = eh.XlsToSales();
-                NcSaleInfoResposities res = new NcSaleInfoResposities();
-                res.InsertCodes(list);
+                List<Sale> list = eh.XlsToSales();
+                SqliteResposity res = new SqliteResposity();
+                res.InsertList(list);
             }
         }
     }

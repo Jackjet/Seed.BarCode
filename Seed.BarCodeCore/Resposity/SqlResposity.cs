@@ -68,6 +68,27 @@ namespace Seed.BarCodeCore.Resposity
                 }
             }
         }
+
+
+        public int LastUpdateId<T>(string productLine) where T:IService,new()
+        {
+            using (var db = SugarDao.GetInstance())
+            {
+                T code =
+                      db.Queryable<T>()
+                          .Where(it => it.ProductLine == productLine)
+                          .OrderBy("Id desc")
+                          .FirstOrDefault();
+                if (code != null)
+                {
+                    return Convert.ToInt32(code.Status);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
         public T LastProduct<T>() where T : new()
         {
             using (var db = SugarDao.GetInstance())

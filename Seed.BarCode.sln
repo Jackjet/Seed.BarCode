@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seed.BarCodeCore", "Seed.Ba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seed.BarCodeLine", "Seed.BarCodeLine\Seed.BarCodeLine.csproj", "{5C035A8F-150B-4F0D-973F-EEEEE3C6059A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seed.StockOutScan", "Seed.BarCodeStore\Seed.StockOutScan.csproj", "{0A638338-6559-4093-B3FE-0B410CF19502}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seed.BarCodeStore", "Seed.BarCodeStore\Seed.BarCodeStore.csproj", "{0A638338-6559-4093-B3FE-0B410CF19502}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

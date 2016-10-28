@@ -41,17 +41,17 @@
             // 
             // BT850
             // 
-            this.BT850.Location = new System.Drawing.Point(12, 92);
+            this.BT850.Location = new System.Drawing.Point(12, 12);
             this.BT850.Name = "BT850";
             this.BT850.Size = new System.Drawing.Size(175, 41);
             this.BT850.TabIndex = 1;
-            this.BT850.Text = "导入PT850";
+            this.BT850.Text = "导入PT800";
             this.BT850.UseVisualStyleBackColor = true;
             this.BT850.Click += new System.EventHandler(this.BT850_Click);
             // 
             // BtStockUp
             // 
-            this.BtStockUp.Location = new System.Drawing.Point(12, 161);
+            this.BtStockUp.Location = new System.Drawing.Point(12, 104);
             this.BtStockUp.Name = "BtStockUp";
             this.BtStockUp.Size = new System.Drawing.Size(175, 41);
             this.BtStockUp.TabIndex = 2;
@@ -61,7 +61,7 @@
             // 
             // BtSaleBaseUp
             // 
-            this.BtSaleBaseUp.Location = new System.Drawing.Point(12, 223);
+            this.BtSaleBaseUp.Location = new System.Drawing.Point(12, 195);
             this.BtSaleBaseUp.Name = "BtSaleBaseUp";
             this.BtSaleBaseUp.Size = new System.Drawing.Size(175, 41);
             this.BtSaleBaseUp.TabIndex = 3;

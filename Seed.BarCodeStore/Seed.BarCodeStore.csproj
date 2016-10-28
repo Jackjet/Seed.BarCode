@@ -101,23 +101,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dao\SugarDao.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\CodeHelp.cs" />
-    <Compile Include="Models\NcHandSaleInfo.cs" />
-    <Compile Include="Models\NcSaleBase.cs" />
-    <Compile Include="Models\NcSaleInfo.cs" />
-    <Compile Include="Models\Npoihelper.cs" />
-    <Compile Include="MsDao\SugarDao.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reposities\NcHandSaleInfoResposities.cs" />
-    <Compile Include="Reposities\NcSaleInfoResposities.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -132,7 +123,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="database\NcBarCode.s3db">
+    <None Include="database\BarCode.s3db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config">
@@ -151,7 +142,15 @@
   <ItemGroup>
     <Content Include="181.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Seed.BarCodeCore\Seed.BarCodeCore.csproj">
+      <Project>{c043eefa-7caf-4702-bd93-4c4f9e7fa9cf}</Project>
+      <Name>Seed.BarCodeCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.103\build\net40\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.103\build\net40\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using NPOI.HSSF.UserModel;
-using System.IO;
-using System.Data;
-using Seed.StockOutScan.Models;
 
-namespace Seed.BarCodeStore.Public
+namespace Seed.BarCodeCore.Models
 {
     public class ExcelHelper : IDisposable
     {
@@ -222,11 +224,11 @@ namespace Seed.BarCodeStore.Public
         //}
 
 
-        public List<NcSaleBase> XlsToSales()
+        public List<Sale> XlsToSales()
         {
-            List<NcSaleBase> list = new List<NcSaleBase> { };
+            List<Sale> list = new List<Sale> { };
             ISheet sheet = null;
-          
+
             _fs = new FileStream(_fileName, FileMode.Open, FileAccess.Read);
             if (_fileName.IndexOf(".xlsx", StringComparison.Ordinal) > 0) // 2007版本
                 _workbook = new XSSFWorkbook(_fs);
@@ -244,9 +246,9 @@ namespace Seed.BarCodeStore.Public
                     IRow row = sheet.GetRow(i);
                     if (row == null) continue; //没有数据的行默认是null　　　　　　　
 
-                    NcSaleBase code = new NcSaleBase();
+                    Sale code = new Sale();
                     code.SaleInfo = row.GetCell(1).ToString();
-                    code.SaleId = row.GetCell(0).ToString();
+                    code.OrderInfo = row.GetCell(0).ToString();
                     code.CreateTime = DateTime.Now;
                     list.Add(code);
                 }

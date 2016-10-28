@@ -7,17 +7,19 @@ using Seed.BarCodeCore.Interface;
 
 namespace Seed.BarCodeCore.Models
 {
-    public class Sale:IId
+    public class Sales:Sale,IService
     {
-        public int Id { get; set; }
-        public string OrderInfo { get; set; }
 
-        public string SaleInfo { get; set; }
-        public DateTime CreateTime { get; set; }
+        
+        public string Status { get; set; }
 
-         public Sale()
+        public string Gid { get; set; }
+
+        public string ProductLine { get; set; }
+
+        public Sales()
         {
-            CreateTime = DateTime.Now;
+            Gid = Guid.NewGuid().ToString();
         }
     }
 }

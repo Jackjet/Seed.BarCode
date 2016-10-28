@@ -60,6 +60,13 @@ namespace Seed.BarCodeCore.Resposity
             }
         }
 
+
+        /// <summary>
+        /// 上传条码数据
+        /// 2016-10-28
+        /// </summary>
+        /// <param name="maxId"></param>
+        /// <returns></returns>
         public List<Products> CodeUpdate(int maxId)
         {
             using (var db = SugarDao.GetInstance())
@@ -77,6 +84,41 @@ namespace Seed.BarCodeCore.Resposity
                     ProductTime=it.ProductTime,
                     Status = it.Id.ObjToString()
                 }).ToList();
+            }
+        }
+
+        /// <summary>
+        /// 上传仓库出库数据
+        /// 2016-10-28
+        /// </summary>
+        /// <param name="maxId">上传之前的最大Id</param>
+        public List<Stores> StoreUpdate(int maxId)
+        {
+            using (var db = SugarDao.GetInstance())
+            {
+                return db.Queryable<Store>().Where(it => it.Id > maxId).OrderBy("Id").ToList()
+                    .Select(it => new Stores
+                    {
+                        OrderInfo=it.OrderInfo,
+                        BigCode=it.BigCode,
+                        CreateTime=it.CreateTime,
+                        Status=it.Id.ToString()
+                    }).ToList();
+            }
+        }
+
+        public List<Sales> SaleUpdate(int maxId)
+        {
+            using (var db = SugarDao.GetInstance())
+            {
+                return db.Queryable<Sale>().Where(it => it.Id > maxId).OrderBy("Id").ToList()
+                    .Select(it => new Sales
+                    {
+                        OrderInfo = it.OrderInfo,
+                        SaleInfo=it.SaleInfo,
+                        CreateTime = it.CreateTime,
+                        Status = it.Id.ToString()
+                    }).ToList();
             }
         }
 
