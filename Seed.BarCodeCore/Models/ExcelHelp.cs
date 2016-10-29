@@ -246,9 +246,9 @@ namespace Seed.BarCodeCore.Models
                     IRow row = sheet.GetRow(i);
                     if (row == null) continue; //没有数据的行默认是null　　　　　　　
 
-                    Sale code = new Sale();
-                    code.SaleInfo = row.GetCell(1).ToString();
+                    Sale code = new Sale();  
                     code.OrderInfo = row.GetCell(0).ToString();
+                    code.SaleInfo = row.GetCell(1).ToString();
                     code.CreateTime = DateTime.Now;
                     list.Add(code);
                 }
