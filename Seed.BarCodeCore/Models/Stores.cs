@@ -14,7 +14,7 @@ namespace Seed.BarCodeCore.Models
 
         public string Gid { get; set; }
 
-        public string ProductLine { get; set; }
+
 
         public Stores()
         {
