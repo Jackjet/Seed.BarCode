@@ -9,5 +9,6 @@ namespace Seed.BarCodeCore.Interface
     public interface IId
     {
         int Id { get; set; }
+        string ProductLine { get; set; }
     }
 }

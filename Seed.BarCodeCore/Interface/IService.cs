@@ -7,6 +7,5 @@ namespace Seed.BarCodeCore.Interface
 
         string Status { get; set; }
 
-        string ProductLine { get; set; }
     }
 }

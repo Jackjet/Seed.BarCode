@@ -9,7 +9,6 @@ namespace Seed.BarCodeCore.Interface
     public interface IProductConfig
     {
         string Specification { get; set; }
-        string ProductLine { get; set; }
         DateTime ProductTime { get; set; }
     }
 }

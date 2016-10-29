@@ -70,13 +70,13 @@ namespace Seed.BarCodeCore.Resposity
         }
 
 
-        public int LastUpdateId<T>(string productLine) where T:IService,new()
+        public int LastUpdateId<T>(string productLine) where T:IId,IService,new()
         {
             using (var db = SugarDao.GetInstance())
             {
-                T code =
-                      db.Queryable<T>()
-                          .Where(it => it.ProductLine == productLine)
+                T code =  db.Queryable<T>()
+                        //  .Where(it => it.ProductLine == productLine)
+                          .Where("productline>@id", new { id = productLine })
                           .OrderBy("Id desc")
                           .FirstOrDefault();
                 if (code != null)
