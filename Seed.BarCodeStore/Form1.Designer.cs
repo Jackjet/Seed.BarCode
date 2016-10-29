@@ -33,6 +33,7 @@
             this.BT850 = new System.Windows.Forms.Button();
             this.BtStockUp = new System.Windows.Forms.Button();
             this.BtSaleBaseUp = new System.Windows.Forms.Button();
+            this.SaleUpService = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFile
@@ -51,7 +52,7 @@
             // 
             // BtStockUp
             // 
-            this.BtStockUp.Location = new System.Drawing.Point(12, 104);
+            this.BtStockUp.Location = new System.Drawing.Point(12, 231);
             this.BtStockUp.Name = "BtStockUp";
             this.BtStockUp.Size = new System.Drawing.Size(175, 41);
             this.BtStockUp.TabIndex = 2;
@@ -61,19 +62,30 @@
             // 
             // BtSaleBaseUp
             // 
-            this.BtSaleBaseUp.Location = new System.Drawing.Point(12, 195);
+            this.BtSaleBaseUp.Location = new System.Drawing.Point(12, 83);
             this.BtSaleBaseUp.Name = "BtSaleBaseUp";
             this.BtSaleBaseUp.Size = new System.Drawing.Size(175, 41);
             this.BtSaleBaseUp.TabIndex = 3;
-            this.BtSaleBaseUp.Text = "销售信息上传";
+            this.BtSaleBaseUp.Text = "销售信息导入";
             this.BtSaleBaseUp.UseVisualStyleBackColor = true;
             this.BtSaleBaseUp.Click += new System.EventHandler(this.BtSaleBaseUp_Click);
+            // 
+            // SaleUpService
+            // 
+            this.SaleUpService.Location = new System.Drawing.Point(12, 304);
+            this.SaleUpService.Name = "SaleUpService";
+            this.SaleUpService.Size = new System.Drawing.Size(175, 41);
+            this.SaleUpService.TabIndex = 4;
+            this.SaleUpService.Text = "销售信息上传";
+            this.SaleUpService.UseVisualStyleBackColor = true;
+            this.SaleUpService.Click += new System.EventHandler(this.SaleUpService_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 462);
+            this.Controls.Add(this.SaleUpService);
             this.Controls.Add(this.BtSaleBaseUp);
             this.Controls.Add(this.BtStockUp);
             this.Controls.Add(this.BT850);
@@ -95,6 +107,7 @@
         private System.Windows.Forms.Button BT850;
         private System.Windows.Forms.Button BtStockUp;
         private System.Windows.Forms.Button BtSaleBaseUp;
+        private System.Windows.Forms.Button SaleUpService;
     }
 }
 

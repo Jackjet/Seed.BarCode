@@ -17,7 +17,7 @@ namespace Seed.BarCodeCore.Models
             //  1.去除前后空白2.判断长度大于10的为准确单号+条码3.截取字符串一直到空格处为单号4.截取最后空格一直到末尾为大号
             //  2.判断单号+条码是否已经存在于数据库中，没有才存入
             //  2014-08-20
-            public string ReadDt930(string url, string newUrl)
+            public string ReadDt930(string url, string newUrl,string productLine)
             {
                 List<Store> list = new List<Store>();
                 foreach (var line in File.ReadAllLines(url))
@@ -30,6 +30,7 @@ namespace Seed.BarCodeCore.Models
                         info.OrderInfo = str.Substring(0, len).Trim();
                         len = str.LastIndexOf(' ');
                         info.BigCode = str.Substring(len, str.Length - len).Trim();
+                        info.ProductLine = productLine;
                     }
                     list.Add(info);
                 }
@@ -47,7 +48,7 @@ namespace Seed.BarCodeCore.Models
             //  1.去除前后空白2.判断长度大于5的为准确单号或条码3.截取字符串有｛的1到空白位置为单号4.截取无其它标识的为大号
             //  2.判断单号+条码是否已经存在于数据库中，没有才存入
             //  2014-08-20
-            public string ReadPt850(string url, string newUrl)
+            public string ReadPt850(string url, string newUrl,string productLine)
             {
                 string str1 = "";
                 List<Store> list = new List<Store>();
@@ -72,6 +73,7 @@ namespace Seed.BarCodeCore.Models
                             var str2 = str.Trim();
                             info.OrderInfo = str1;
                             info.BigCode = str2;
+                            info.ProductLine = productLine;
                             list.Add(info);
                         }
                     }

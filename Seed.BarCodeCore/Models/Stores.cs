@@ -14,8 +14,6 @@ namespace Seed.BarCodeCore.Models
 
         public string Gid { get; set; }
 
-
-
         public Stores()
         {
             Gid = Guid.NewGuid().ToString();

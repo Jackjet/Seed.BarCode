@@ -16,6 +16,7 @@ namespace Seed.BarCodeStore
     public partial class Main : Form
     {
         private readonly string _fileUrl = System.Configuration.ConfigurationManager.AppSettings["FileUrl"];
+        readonly string _productLine = System.Configuration.ConfigurationManager.AppSettings["ProductLine"];
         public Main()
         {
             InitializeComponent();
@@ -35,23 +36,22 @@ namespace Seed.BarCodeStore
             if (openFile.ShowDialog(this) == DialogResult.OK)
             {
                 CodeScanHelp code = new CodeScanHelp();
-                code.ReadPt850(openFile.FileName, _fileUrl);
+                code.ReadPt850(openFile.FileName, _fileUrl,_productLine);
             }
         }
 
         private void BtStockUp_Click(object sender, EventArgs e)
         {
             BtStockUp.Enabled = false;
-            Thread thread = new Thread(new ThreadStart(LoadStockData)) {IsBackground = true};
+            Thread thread = new Thread(new ThreadStart(LoadStoreData)) {IsBackground = true};
             thread.Start();
         }
 
-        public void LoadStockData()
-        {
-            string productLine = System.Configuration.ConfigurationManager.AppSettings["ProductLine"];
+        public void LoadStoreData()
+        {         
             DateTime beforDt = DateTime.Now;
             SqlResposity res = new SqlResposity();
-            int maxId = res.LastUpdateId<Stores>(productLine);
+            int maxId = res.LastUpdateId<Stores>(_productLine);
             SqliteResposity re = new SqliteResposity();
             List<Stores> list = re.StoreUpdate(maxId);
             res.InsertList(list);
@@ -74,6 +74,31 @@ namespace Seed.BarCodeStore
                 SqliteResposity res = new SqliteResposity();
                 res.InsertList(list);
             }
+        }
+
+        private void SaleUpService_Click(object sender, EventArgs e)
+        {
+            SaleUpService.Enabled = false;
+            Thread thread = new Thread(new ThreadStart(LoadSalesData)) { IsBackground = true };
+            thread.Start();
+        }
+
+        public void LoadSalesData()
+        {
+            DateTime beforDt = DateTime.Now;
+            SqlResposity res = new SqlResposity();
+            int maxId = res.LastUpdateId<Sales>(_productLine);
+            SqliteResposity re = new SqliteResposity();
+            List<Sales> list = re.SaleUpdate(maxId);
+            res.InsertList(list);
+
+            this.BeginInvoke(new MethodInvoker(delegate()
+            {
+                BtStockUp.Enabled = true;
+                DateTime afterDt = DateTime.Now;
+                TimeSpan ts = afterDt.Subtract(beforDt);
+                MessageBox.Show("上传数据花费：" + ts.TotalSeconds + ".s");
+            }));
         }
     }
 }
