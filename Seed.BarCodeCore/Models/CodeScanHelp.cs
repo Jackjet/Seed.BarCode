@@ -31,6 +31,7 @@ namespace Seed.BarCodeCore.Models
                         len = str.LastIndexOf(' ');
                         info.BigCode = str.Substring(len, str.Length - len).Trim();
                         info.ProductLine = productLine;
+                        info.CreateTime = DateTime.Now;
                     }
                     list.Add(info);
                 }
@@ -74,6 +75,7 @@ namespace Seed.BarCodeCore.Models
                             info.OrderInfo = str1;
                             info.BigCode = str2;
                             info.ProductLine = productLine;
+                            info.CreateTime = DateTime.Now;
                             list.Add(info);
                         }
                     }
