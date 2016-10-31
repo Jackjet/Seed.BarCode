@@ -24,7 +24,7 @@ namespace Seed.BarCodeCore.Resposity
         {
             using (var db = SugarDao.GetInstance())
             {
-                return db.Queryable<Product>().Any(it => it.SmlCode == code);
+                return db.Queryable<Product>().Any(it => it.BigCode == code);
             }
         }
 
