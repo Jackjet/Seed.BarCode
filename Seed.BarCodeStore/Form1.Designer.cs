@@ -83,6 +83,7 @@
             // 
             // info
             // 
+            this.info.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.info.Location = new System.Drawing.Point(205, 13);
             this.info.Name = "info";
             this.info.Size = new System.Drawing.Size(553, 332);
