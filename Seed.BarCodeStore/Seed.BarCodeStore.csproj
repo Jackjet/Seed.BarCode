@@ -67,8 +67,8 @@
       <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SqliteSugar, Version=2.4.5.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\sqliteSugar.2.4.5.5\lib\net40\SqliteSugar.dll</HintPath>
+    <Reference Include="SqliteSugar">
+      <HintPath>..\packages\sqliteSugar.3.1.1.7\lib\net40\SqliteSugar.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SqlSugar, Version=3.1.0.9, Culture=neutral, processorArchitecture=MSIL">
@@ -141,6 +141,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="181.ico" />
+    <Content Include="Lib\System.Data.SQLite.dll" />
+    <Content Include="Lib\System.Data.SQLite.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Seed.BarCodeCore\Seed.BarCodeCore.csproj">
