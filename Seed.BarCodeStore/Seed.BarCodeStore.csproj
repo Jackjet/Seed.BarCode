@@ -124,7 +124,7 @@
     </Compile>
     <None Include="app.config" />
     <None Include="database\BarCode.s3db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
