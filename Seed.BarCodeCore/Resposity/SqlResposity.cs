@@ -76,7 +76,6 @@ namespace Seed.BarCodeCore.Resposity
             {
                 T code =  db.Queryable<T>()
                           .Where(it => it.ProductLine == productLine)
-                        //  .Where("productline=@id", new { id = productLine })
                           .OrderBy("Id desc")
                           .FirstOrDefault();
                 if (code != null)

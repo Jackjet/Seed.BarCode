@@ -102,6 +102,7 @@ namespace Seed.BarCodeCore.Resposity
                         OrderInfo=it.OrderInfo,
                         BigCode=it.BigCode,
                         CreateTime=it.CreateTime,
+                        ProductLine=it.ProductLine,
                         Status=it.Id.ToString()
                     }).ToList();
             }
@@ -117,6 +118,7 @@ namespace Seed.BarCodeCore.Resposity
                         OrderInfo = it.OrderInfo,
                         SaleInfo=it.SaleInfo,
                         CreateTime = it.CreateTime,
+                        ProductLine=it.ProductLine,
                         Status = it.Id.ToString()
                     }).ToList();
             }

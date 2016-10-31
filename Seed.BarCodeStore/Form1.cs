@@ -70,7 +70,7 @@ namespace Seed.BarCodeStore
             if (openFile.ShowDialog(this) == DialogResult.OK)
             {
                 ExcelHelper eh = new ExcelHelper(openFile.FileName);
-                List<Sale> list = eh.XlsToSales();
+                List<Sale> list = eh.XlsToSales(_productLine);
                 SqliteResposity res = new SqliteResposity();
                 res.InsertList(list);
             }

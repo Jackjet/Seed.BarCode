@@ -224,7 +224,7 @@ namespace Seed.BarCodeCore.Models
         //}
 
 
-        public List<Sale> XlsToSales()
+        public List<Sale> XlsToSales(string productLine)
         {
             List<Sale> list = new List<Sale> { };
             ISheet sheet = null;
@@ -250,6 +250,7 @@ namespace Seed.BarCodeCore.Models
                     code.OrderInfo = row.GetCell(0).ToString();
                     code.SaleInfo = row.GetCell(1).ToString();
                     code.CreateTime = DateTime.Now;
+                    code.ProductLine = productLine;
                     list.Add(code);
                 }
             }
