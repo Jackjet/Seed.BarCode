@@ -175,7 +175,13 @@ namespace Seed.BarCodeCore.Models
         private void InsertCode(string code)
         {
             if (_curConfig.StoreType== "1")
-            {              ;
+            {       
+                //当规格为0，即只扫大条码时，手动添加一个小码到list;
+                //2016-10-31
+                if (_curProduct.Specification == "0")
+                {
+                    SmlCodeList.Items.Add(code);
+                }
                 Resposity.InsertList(BarCodeTist<Product>(code));
                 Resposity.UpdateCount(Count);
             }
