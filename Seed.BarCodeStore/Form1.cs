@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Seed.BarCodeCore.Models;
@@ -36,7 +31,12 @@ namespace Seed.BarCodeStore
             if (openFile.ShowDialog(this) == DialogResult.OK)
             {
                 CodeScanHelp code = new CodeScanHelp();
-                code.ReadPt850(openFile.FileName, _fileUrl,_productLine);
+                List<Store> list =code.ReadPt850(openFile.FileName, _fileUrl,_productLine);
+                info.Text = "";
+                foreach (var store in list)
+                {
+                    info.AppendText("单号："+store.OrderInfo +",物流码："+ store.BigCode);
+                }
             }
         }
 
@@ -61,7 +61,8 @@ namespace Seed.BarCodeStore
                 BtStockUp.Enabled = true;
                 DateTime afterDt = DateTime.Now;
                 TimeSpan ts = afterDt.Subtract(beforDt);
-                MessageBox.Show("上传数据花费：" + ts.TotalSeconds + ".s");
+                info.AppendText("上传数据" + list.Count + "条.");
+                info.AppendText("上传数据花费：" + ts.TotalSeconds + ".s");
             }));
         }
 
@@ -73,6 +74,11 @@ namespace Seed.BarCodeStore
                 List<Sale> list = eh.XlsToSales(_productLine);
                 SqliteResposity res = new SqliteResposity();
                 res.InsertList(list);
+                info.Text = "";
+                foreach (var store in list)
+                {
+                    info.AppendText("单号：" + store.OrderInfo + ",客户信息：" + store.SaleInfo);
+                }
             }
         }
 
@@ -97,7 +103,8 @@ namespace Seed.BarCodeStore
                 BtStockUp.Enabled = true;
                 DateTime afterDt = DateTime.Now;
                 TimeSpan ts = afterDt.Subtract(beforDt);
-                MessageBox.Show("上传数据花费：" + ts.TotalSeconds + ".s");
+                info.AppendText("上传数据" + list.Count + "条.");
+                info.AppendText("上传数据花费：" + ts.TotalSeconds + ".s");
             }));
         }
     }

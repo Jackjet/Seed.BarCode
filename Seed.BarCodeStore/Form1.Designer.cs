@@ -34,6 +34,7 @@
             this.BtStockUp = new System.Windows.Forms.Button();
             this.BtSaleBaseUp = new System.Windows.Forms.Button();
             this.SaleUpService = new System.Windows.Forms.Button();
+            this.info = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // openFile
@@ -80,11 +81,20 @@
             this.SaleUpService.UseVisualStyleBackColor = true;
             this.SaleUpService.Click += new System.EventHandler(this.SaleUpService_Click);
             // 
+            // info
+            // 
+            this.info.Location = new System.Drawing.Point(205, 13);
+            this.info.Name = "info";
+            this.info.Size = new System.Drawing.Size(553, 332);
+            this.info.TabIndex = 5;
+            this.info.Text = "";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 462);
+            this.ClientSize = new System.Drawing.Size(784, 367);
+            this.Controls.Add(this.info);
             this.Controls.Add(this.SaleUpService);
             this.Controls.Add(this.BtSaleBaseUp);
             this.Controls.Add(this.BtStockUp);
@@ -108,6 +118,7 @@
         private System.Windows.Forms.Button BtStockUp;
         private System.Windows.Forms.Button BtSaleBaseUp;
         private System.Windows.Forms.Button SaleUpService;
+        private System.Windows.Forms.RichTextBox info;
     }
 }
 
